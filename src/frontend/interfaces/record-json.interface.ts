@@ -8,9 +8,9 @@ import { ActionJSON } from './action/action-json.interface.js'
  */
 export type ErrorMessage = {
   /** Human readable message */
-  message: string;
+  message: string
   /** Error type */
-  type?: ErrorTypeEnum | string;
+  type?: ErrorTypeEnum | string
 }
 
 /**
@@ -21,35 +21,37 @@ export interface RecordJSON {
   /**
    * all flatten params of given record
    */
-  params: ParamsType;
+  params: ParamsType
   /**
    * If the record has properties which are references - here there will be populated records
    */
-  populated: Record<string, RecordJSON | null | undefined>;
+  populated: Record<string, RecordJSON | null | undefined>
   /**
    * Any base/overall validation error for the record
    */
-  baseError: RecordError | null;
+  baseError: RecordError | null
   /**
    * List of all validation errors
    */
-  errors: Record<string, ErrorMessage>;
+  errors: Record<string, ErrorMessage>
   /**
    * Uniq Id of a record. Not present if the record is new (in NewAction)
    */
-  id: string;
+  id: string
+
+  _id: ArrayBuffer
   /**
    * Title of an record. Not present if the record is new (in NewAction)
    */
-  title: string;
+  title: string
   /**
    * Actions which can be performed on this record.
    */
-  recordActions: Array<ActionJSON>;
+  recordActions: Array<ActionJSON>
   /**
    * Actions which can be performed on this record in a bulk.
    */
-  bulkActions: Array<ActionJSON>;
+  bulkActions: Array<ActionJSON>
 }
 
 // TODO: describe flatten params

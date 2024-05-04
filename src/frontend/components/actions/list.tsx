@@ -12,22 +12,11 @@ import { ActionProps } from './action.props.js'
 import { REFRESH_KEY } from './utils/append-force-refresh.js'
 
 const List: React.FC<ActionProps> = ({ resource, setTag }) => {
-  const {
-    records,
-    loading,
-    direction,
-    sortBy,
-    page,
-    total,
-    fetchData,
-    perPage,
-  } = useRecords(resource.id)
-  const {
-    selectedRecords,
-    handleSelect,
-    handleSelectAll,
-    setSelectedRecords,
-  } = useSelectedRecords(records)
+  const { records, loading, direction, sortBy, page, total, fetchData, perPage } = useRecords(
+    resource.id,
+  )
+  const { selectedRecords, handleSelect, handleSelectAll, setSelectedRecords } =
+    useSelectedRecords(records)
   const location = useLocation()
   const { storeParams } = useQueryParams()
 
@@ -47,9 +36,7 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
       setSelectedRecords([])
     } else {
       const recordIds = search.get('recordIds')?.split?.(',') ?? []
-      setSelectedRecords(
-        records.filter((r) => recordIds.includes(r.id.toString())),
-      )
+      setSelectedRecords(records.filter((r) => recordIds.includes(r.id.toString())))
     }
   }, [location.search, records])
 
@@ -75,12 +62,7 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
         isLoading={loading}
       />
       <Text mt="xl" textAlign="center">
-        <Pagination
-          page={page}
-          perPage={perPage}
-          total={total}
-          onChange={handlePaginationChange}
-        />
+        <Pagination page={page} perPage={perPage} total={total} onChange={handlePaginationChange} />
       </Text>
     </Box>
   )
@@ -88,8 +70,4 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
 
 const OverridableList = allowOverride(List, 'DefaultListAction')
 
-export {
-  OverridableList as default,
-  OverridableList as List,
-  List as OriginalList,
-}
+export { OverridableList as default, OverridableList as List, List as OriginalList }
